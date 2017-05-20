@@ -121,7 +121,6 @@ class TestPlanningGraphHeuristics(unittest.TestCase):
         self.pg = PlanningGraph(self.p, self.p.initial)
 
     def test_levelsum(self):
-        self.pg.h_levelsum()
         self.assertEqual(self.pg.h_levelsum(), 1)
 
 
