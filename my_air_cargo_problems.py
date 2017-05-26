@@ -188,6 +188,7 @@ class AirCargoProblem(Problem):
         pg_levelsum = pg.h_levelsum()
         return pg_levelsum
 
+
     @lru_cache(maxsize=8192)
     def h_ignore_preconditions(self, node: Node):
         """This heuristic estimates the minimum number of actions that must be
@@ -197,32 +198,17 @@ class AirCargoProblem(Problem):
         """
         # TODO implement (see Russell-Norvig Ed-3 10.2.3  or Russell-Norvig Ed-2 11.2)
         #remove preconditions from action
-        actions = []
-        for action in self.actions_list:
-            tmp_action = deepcopy(action)
-            tmp_action.precond_pos = []
-            actions.append(tmp_action)
-
-        # breadth first "graph" search
+        #we use the fact that each action only has one effect and every clause has an action that can
+        #make it satisfied , thus after ignoring precondtions
+        #and action effects that contradict any clause in the goal state, the minimum number
+        #of actions is the same as the number of unsatisfied clauses in the current state
+        kb = PropKB()
+        kb.tell(decode_state(node.state, self.state_map).pos_sentence())
         count = 0
-        found = False
-        old_frontier = [node.state]
-        new_frontier = []
-        while not found:
-            count += 1
-            for action in actions:
-                for state in old_frontier:
-                    new_state = self.result(state, action)
-                    if self.goal_test(new_state):
-                        found = True
-                        break
-                    new_frontier.append(new_state)
-                if found:
-                    break
-            old_frontier = new_frontier
-            new_frontier = []
+        for clause in self.goal:
+            if clause not in kb.clauses:
+                count +=1
         return count
-
 
 def air_cargo_p1() -> AirCargoProblem:
     cargos = ['C1', 'C2']

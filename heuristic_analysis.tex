@@ -1,0 +1,108 @@
+\documentclass[11pt]{article}
+\usepackage{latexsym,amsmath,amssymb,amsfonts,longtable,graphicx}
+\pagestyle{empty}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-2.0cm}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{24.5cm}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.1cm}
+
+\begin{document}
+
+An optimal plan for air cargo p1 is:\\
+
+Load(C1, P1, SFO)\\
+Load(C2, P2, JFK)\\
+Fly(P1, SFO, JFK)\\
+Fly(P2, JFK, SFO)\\
+Unload(C1, P1, JFK)\\
+Unload(C2, P2, SFO)\\
+
+An optimal plan for air cargo p2 is:\\
+
+Load(C1, P1, SFO)\\
+Load(C2, P2, JFK)\\
+Load(C3, P3, ATL)\\
+Fly(P1, SFO, JFK)\\
+Fly(P2, JFK, SFO)\\
+Fly(P3, ATL, SFO)\\
+Unload(C3, P3, SFO)\\
+Unload(C2, P2, SFO)\\
+Unload(C1, P1, JFK)\\
+
+An optimal plan for air cargo p3 is:\\
+
+Load(C1, P1, SFO)\\
+Load(C2, P2, JFK)\\
+Fly(P1, SFO, ATL)\\
+Load(C3, P1, ATL)\\
+Fly(P2, JFK, ORD)\\
+Load(C4, P2, ORD)\\
+Fly(P2, ORD, SFO)\\
+Fly(P1, ATL, JFK)\\
+Unload(C1, P1, JFK)\\
+Unload(C2, P2, SFO)\\
+Unload(C3, P1, JFK)\\
+Unload(C4, P2, SFO)\\
+
+
+
+The performance metrics for three breadth first, depth first and uniform cost search are shown in Table~\ref{uninformed} below.
+Overall, depth first search performs better in terms of the time spent, number of goal tests and number of node expansions, however, since 
+it searches by first executing actions to get to states deeper in the tree, it fails to provide an optimal solution. Uniform cost search and breadth first search 
+both provide optimal solutions, and their performances are similar in terms of number of goal tests. Uniform cost search peforms worse than breadth first search in terms of node expansions.
+However, as the problems gets more challenging, uniform cost search performs better than breadth first search in terms of time spent. \\
+
+\begin{table}[h!]
+\caption{Performance metrics of three uninformed search techniques}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{||c | c | c| c| c|c ||} 
+ \hline
+Problem &Technique &  No of node expansions & No of goal tests & Time elapsed in seconds & Optimal Solution Obtained \\ \hline
+air cargo p1 & Breadth first search & 43 & 56 & 0.0209 & Yes\\ \hline
+air cargo p1 & Depth first graph search & 21 & 22 & 0.0096 & No\\ \hline
+air cargo p1 & Uniform cost search & 55 & 57 & 0.0249 & Yes\\ \hline
+air cargo p2 & Breadth first search & 3346 & 4612 & 9.0769 & Yes\\ \hline
+air cargo p2 & Depth first graph search & 107 & 108 & 0.2132 & No\\ \hline
+air cargo p2 & Uniform cost search & 4853 & 4855 & 7.5028 & Yes\\ \hline
+air cargo p3 & Breadth first search & 14663 & 18098 & 67.5347 & Yes\\ \hline
+air cargo p3 & Depth first graph search & 408 & 409 & 1.1598 & No\\ \hline
+air cargo p3 & Uniform cost search & 17882 & 17884 & 32.0927 & Yes\\ \hline
+\end{tabular}}
+\label{uninformed}
+\end{table}
+
+The performance metrics for A* search using the three different heuristic functions are shown in Table~\ref{heuristic} below. 
+We focus on the heuristics h ignore preconditions and h pg level sum. Both heuristics give an optimal solution, but as the problem gets more challenging,
+ h ignore preconditions spends less time that h pg level sum. However, h ignore preconditions performs more node expansions and more goal tests.\\
+
+\begin{table}[h!]
+\caption{Performance metrics of the three heuristics using informed search technique A*}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{||c | c | c| c| c|c ||} 
+ \hline
+Problem &Heuristic &  No of node expansions & No of goal tests & Time elapsed in seconds & Optimal Solution Obtained \\ \hline
+air cargo p1 & h1 & 55 & 57 & 0.0251 & Yes\\ \hline
+air cargo p1 & h ignore preconditions & 41 & 43 & 0.0268 & Yes\\ \hline
+air cargo p1 & h pg levelsum & 39 & 41 & 0.9640 & Yes\\ \hline
+air cargo p2 & h1 & 4853 & 4855 & 7.3531 & Yes\\ \hline
+air cargo p2 & h ignore preconditions & 1450 & 1452 & 2.7441 & Yes\\ \hline
+air cargo p2 & h pg levelsum & 1129 & 1131 & 301.4720 & Yes\\ \hline
+air cargo p3 & h1 & 17882 & 17884 & 31.3946 & Yes\\ \hline
+air cargo p3 & h ignore preconditions & 5034 & 5036 & 10.6019 & Yes\\ \hline
+air cargo p3 & h pg levelsum & 2025 & 2027 & 1038.5874 & Yes\\ \hline
+\end{tabular}}
+\label{heuristic}
+\end{table}
+
+To compare performance of uninformed search to heuristic search techniques, its perhaps better to focus on the more challenging air cargo p3. 
+In this regard, depth first search is the best technique in terms of time spent, number of node expansions and number of goal tests,
+ however it fails to provide an optimal solution. Among the techniques that give an optimal solution the h ignore precondition heuristic performed
+ best in terms of time spent, however h pg level sum performs best in terms of number of node expansions and number of goal tests. Overall the best heuristic 
+ is h ignore preconditions.
+\end{document}
+\grid
