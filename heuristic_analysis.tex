@@ -53,7 +53,7 @@ The performance metrics for three breadth first, depth first and uniform cost se
 Overall, depth first search performs better in terms of the time spent, number of goal tests and number of node expansions, however, since 
 it searches by first executing actions to get to states deeper in the tree, it fails to provide an optimal solution. Uniform cost search and breadth first search 
 both provide optimal solutions, and their performances are similar in terms of number of goal tests. Uniform cost search peforms worse than breadth first search in terms of node expansions.
-However, as the problems gets more challenging, uniform cost search performs better than breadth first search in terms of time spent. \\
+However, as the problems gets more challenging, uniform cost search performs better than breadth first search in terms of time spent. The non-optimality of the solution provided by depth first search and the optimality of the solution privided by breadth first and uniform cost search aligns with what we lerned in the search comparison module of the search chapter in class. \\
 
 \begin{table}[h!]
 \caption{Performance metrics of three uninformed search techniques}
@@ -77,7 +77,7 @@ air cargo p3 & Uniform cost search & 17882 & 17884 & 32.0927 & Yes\\ \hline
 
 The performance metrics for A* search using the three different heuristic functions are shown in Table~\ref{heuristic} below. 
 We focus on the heuristics h ignore preconditions and h pg level sum. Both heuristics give an optimal solution, but as the problem gets more challenging,
- h ignore preconditions spends less time that h pg level sum. However, h ignore preconditions performs more node expansions and more goal tests.\\
+ h ignore preconditions spends less time that h pg level sum. However, h ignore preconditions performs more node expansions and more goal tests. From the search chapter in class we learned that using an admissible heuristic for A* search always lead to an optimal solution. Sections 10.2.3 and 10.3.1 of the third edition of the AIMA textbook discuss the admissibility of h ignore preconditions and h pg level sum respectively. Therefore as expected we do obtain optimal soultions using them, \\
 
 \begin{table}[h!]
 \caption{Performance metrics of the three heuristics using informed search technique A*}
